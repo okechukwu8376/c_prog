@@ -53,7 +53,7 @@ void inspectString(const char *str) {
 }
 
 
-float runCalculation(char *op, float *num1, float *num2, float *res) {
+void runCalculation(char *op, float *num1, float *num2, float *res) {
     if (strcmp(op, "+") == 0) {
         *res = *num1 + *num2;
     }
@@ -98,6 +98,10 @@ int main() {
             int matches = sscanf(numBuffer, "%f %f", &num1, &num2);
             
             if(matches == 2) {
+                if(num2 == 0 && (strcmp(op, "/") == 0)) {
+                    printf("We can't divide a number by 0. Please try again. \n");
+                    break;
+                }
                 runCalculation(op, &num1, &num2, &res);
                 printf("The result for %f %s %f is %f\n", num1, op, num2, res);
             }
